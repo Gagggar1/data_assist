@@ -1,0 +1,82 @@
+<section id="page-shell" class="chat-layout">
+    <div class="chat-stage panel">
+        <div class="chat-stage__header">
+            <div>
+                <p class="eyebrow">AI Workspace</p>
+                <h1>Чат по данным и файлам</h1>
+                <p class="subtle">
+                    Отправляйте текст, загружайте таблицы и изображения, стройте графики и сохраняйте результаты в файлы прямо в диалоге.
+                </p>
+                <div class="preview-meta">
+                    {% if ai_enabled %}
+                        <span>{{ prompt_role }} · {{ ai_model }}</span>
+                    {% else %}
+                        <span>LLM не настроен — работает локальный fallback</span>
+                    {% endif %}
+                </div>
+                <div class="workflow-steps" aria-label="Как работать с сервисом">
+                    <span><b>1</b> Загрузите данные</span>
+                    <span><b>2</b> Спросите AI</span>
+                    <span><b>3</b> Сохраните результат</span>
+                </div>
+            </div>
+            <a class="ghost-btn header-new-chat" href="/">+ Новый чат</a>
+        </div>
+
+        <div id="chat-thread" class="chat-thread">
+            {% include "partials/chat_thread.html" %}
+        </div>
+
+        <form
+            class="composer"
+            hx-post="/chat/{{ conversation.conversation_id }}/message"
+            hx-target="#chat-thread"
+            hx-swap="innerHTML"
+            hx-encoding="multipart/form-data"
+            enctype="multipart/form-data"
+        >
+            <div class="composer__label">
+                <span>Ваш запрос</span>
+                <span class="composer__hint">Shift + Enter — новая строка</span>
+            </div>
+            <div class="composer__top">
+                <textarea
+                    id="message-text"
+                    name="message_text"
+                    rows="1"
+                    placeholder="Например: проанализируй файл, построй pie/scatter, создай отчёт или сохрани summary"
+                ></textarea>
+            </div>
+
+            <div class="composer__bottom">
+                <label class="attach-btn" for="data-file">
+                    <input
+                        id="data-file"
+                        name="data_file"
+                        type="file"
+                        accept=".csv,.xlsx,.xls,.json,.png,.jpg,.jpeg,.bmp,.gif,.webp"
+                    >
+                    <span>Файл или изображение</span>
+                </label>
+
+                <div id="selected-file-pill" class="selected-file-pill" hidden></div>
+
+                <div class="composer__actions">
+                    <button class="ghost-btn" type="button" data-prompt="Покажи предпросмотр активного файла">Preview</button>
+                    <button class="secondary-btn" type="button" data-prompt="Проанализируй текущий файл, кратко">Анализ</button>
+                    <button class="primary-btn" type="submit">Отправить</button>
+                </div>
+            </div>
+            <div class="prompt-chips" aria-label="Примеры запросов">
+                <button type="button" data-prompt="Кратко объясни ключевые выводы из активного файла">Ключевые выводы</button>
+                <button type="button" data-prompt="Найди аномалии и возможные причины">Найти аномалии</button>
+                <button type="button" data-prompt="Какие графики лучше построить для этих данных?">Подобрать графики</button>
+            </div>
+        </form>
+    </div>
+
+    <aside class="side-rail" id="side-rail">
+        <div class="rail-label"><span>Workspace</span><span class="rail-label__pulse"></span></div>
+        {% include "partials/chat_sidebar.html" %}
+    </aside>
+</section>

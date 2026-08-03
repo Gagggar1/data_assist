@@ -1,0 +1,53 @@
+# --- Секреты и локальные настройки ---
+.env
+.env.*
+!.env.example
+
+# --- Данные приложения (создаются во время работы) ---
+/storage/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# --- Виртуальные окружения ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- Логи ---
+*.log
+
+# --- IDE и редакторы ---
+.vscode/
+.idea/
+.cursor/
+.history/
+*.sublime-workspace
+*.sublime-project
+
+# --- Операционная система ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Временные файлы офисных программ ---
+~$*
+*.tmp
+
+# --- Учебные материалы и отчёты (не часть проекта) ---
+pecb08.txt
+DOMashnee_zadanie.*
+*.docx

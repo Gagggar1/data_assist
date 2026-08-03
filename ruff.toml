@@ -1,0 +1,3 @@
+[lint]
+# FastAPI intentionally declares dependencies and form fields as parameter defaults.
+ignore = ["B008"]

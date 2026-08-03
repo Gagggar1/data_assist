@@ -1,0 +1,66 @@
+<section id="page-shell" class="landing-shell">
+    <div class="hero-card hero-card--v2">
+        <div class="hero-card__glow"></div>
+        <p class="eyebrow">Data intelligence workspace</p>
+        <h1>Превратите файл<br>в понятное <em>решение.</em></h1>
+        <p class="hero-text">
+            Загружайте данные, спрашивайте AI человеческим языком и сразу получайте графики, ключевые выводы и отчёты.
+        </p>
+        <div class="hero-points hero-points--v2">
+            <span><b>01</b> Загрузка</span>
+            <span><b>02</b> Анализ</span>
+            <span><b>03</b> Решение</span>
+        </div>
+        <div class="hero-signal"><i></i> AI Workspace готов к работе</div>
+    </div>
+
+    <div class="upload-card upload-card--v2">
+        <div class="card-heading">
+            <div>
+                <p class="eyebrow">Новый анализ</p>
+                <h2>Добавьте источник данных</h2>
+            </div>
+            <span class="format-badge">CSV · XLSX · JSON · IMG</span>
+        </div>
+
+        {% if error_message %}
+            <div class="alert alert-error">{{ error_message }}</div>
+        {% endif %}
+        {% if success_message %}
+            <div class="alert alert-success">{{ success_message }}</div>
+        {% endif %}
+
+        <form
+            class="upload-form"
+            hx-post="/upload"
+            hx-target="#page-shell"
+            hx-swap="outerHTML"
+            hx-encoding="multipart/form-data"
+            enctype="multipart/form-data"
+        >
+            <label class="dropzone" for="data-file">
+                <input id="data-file" name="data_file" type="file" accept=".csv,.xlsx,.xls,.json,.png,.jpg,.jpeg,.bmp,.gif,.webp" required>
+                <span class="dropzone-icon">↑</span>
+                <strong>Перетащите файл сюда</strong>
+                <small>или нажмите, чтобы выбрать на компьютере</small>
+                <span class="dropzone-badge">до 10 MB</span>
+            </label>
+            <div class="upload-form__footer">
+                <span id="dropzone-file-name">Файл не выбран</span>
+                <button class="primary-btn" type="submit">Начать анализ <b>→</b></button>
+            </div>
+        </form>
+
+        <div class="support-grid support-grid--v2">
+            <article>
+                <span>▦</span><div><h3>Таблицы</h3><p>Метрики, тренды и аномалии</p></div>
+            </article>
+            <article>
+                <span>⌁</span><div><h3>Графики</h3><p>Визуализация в один клик</p></div>
+            </article>
+            <article>
+                <span>↗</span><div><h3>Отчёты</h3><p>Экспорт в DOCX и Markdown</p></div>
+            </article>
+        </div>
+    </div>
+</section>
